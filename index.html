@@ -1,51 +1,85 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="es">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Valentine's Proposal</title>
+    <title>Propuesta de San Valentín</title>
+    <link rel="stylesheet" href="styles.css">
     <style>
-        body { font-family: Arial, sans-serif; background: pink; overflow: hidden; animation: pulse 5s infinite; }
-        @keyframes pulse { 0% { background-color: #ffcccb; } 50% { background-color: #ffb6c1; } 100% { background-color: #ffcccb; } }
-        .screen { position: absolute; width: 100%; height: 100%; display: none; justify-content: center; align-items: center; transition: opacity 0.5s; }
-        .active { display: flex; opacity: 1; }
-        .button { padding: 10px 20px; font-size: 20px; cursor: pointer; border: none; background: #ff69b4; color: white; border-radius: 5px; }
-        .button:hover { background: #ff1493; animation: ripple 0.6s linear; }
-        @keyframes ripple { from { transform: scale(1); opacity: 1; } to { transform: scale(1.5); opacity: 0; } }
+        body {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            background-color: #ffcccb;
+            overflow: hidden;
+            font-family: 'Arial', sans-serif;
+            position: relative;
+        }
+        h1 {
+            font-size: 3em;
+            text-align: center;
+            color: #ff69b4;
+            animation: sparkle 1s infinite;
+        }
+        @keyframes sparkle {
+            0% { text-shadow: 0 0 10px #fff; }
+            50% { text-shadow: 0 0 20px #ffc0cb; }
+            100% { text-shadow: 0 0 10px #fff; }
+        }
+        .happy-dog {
+            position: absolute;
+            bottom: 10%;
+            left: 50%;
+            transform: translateX(-50%);
+            animation: wag 1s infinite;
+        }
+        @keyframes wag {
+            0% { transform: translateX(-50%) rotate(0deg); }
+            50% { transform: translateX(-50%) rotate(5deg); }
+            100% { transform: translateX(-50%) rotate(0deg); }
+        }
+        .hearts {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            animation: float 5s linear infinite;
+        }
+        @keyframes float {
+            0% { transform: translateY(0); }
+            100% { transform: translateY(-100%); }
+        }
     </style>
 </head>
 <body>
-    <div class="screen active">
-        <h1>Will you be my Valentine?</h1>
-        <button class="button" onclick="nextScreen()">Yes!</button>
+    <div class="hearts">
+        <!-- Floating hearts (add SVGs or images here) -->
+        <img src="heart.png" alt="Corazón" style="position:absolute; animation: floating 3s infinite;">
     </div>
-    <div class="screen">
-        <h2>Here's a sparkly surprise!</h2>
-        <button class="button" onclick="nextScreen()">Continue</button>
-    </div>
-    <div class="screen">
-        <h2>💖 I love you! 💖</h2>
-        <button class="button" onclick="nextScreen()">Next</button>
-    </div>
-    <div class="screen">
-        <h2>Let’s celebrate with confetti!</h2>
-        <button class="button" onclick="conclude()">Let's go!</button>
-    </div>
+    <h1>¡Feliz San Valentín!</h1>
+    <img src="happy-dog.png" alt="Perro feliz" class="happy-dog">
+    <p style="font-size: 1.5em; color: #ff1493;">Propuesta con amor, alegría y diversión. ❤️</p>
     <script>
-        let currentScreen = 0;
-        function nextScreen() {
-            const screens = document.querySelectorAll('.screen');
-            screens[currentScreen].classList.remove('active');
-            currentScreen++;
-            if (currentScreen < screens.length) {
-                screens[currentScreen].classList.add('active');
+        // Interactive confetti
+        const confetti = () => {
+            const colors = ['#f00', '#0f0', '#00f', '#ff0', '#0ff', '#f0f'];
+            const confettiCount = 150;
+            for (let i = 0; i < confettiCount; i++) {
+                const confetto = document.createElement('div');
+                confetto.style.position = 'absolute';
+                confetto.style.width = '10px';
+                confetto.style.height = '10px';
+                confetto.style.backgroundColor = colors[Math.floor(Math.random() * colors.length)];
+                confetto.style.top = Math.random() * 100 + 'vh';
+                confetto.style.left = Math.random() * 100 + 'vw';
+                document.body.appendChild(confetto);
+                setTimeout(() => confetto.remove(), 3000);
             }
-        }
-        function conclude() {
-            alert('Thank you for celebrating love!');
-            document.body.style.background = 'white';
-            // Add confetti and animations here in future implementation
-        }
+        };
+        setTimeout(confetti, 1000);
     </script>
 </body>
 </html>

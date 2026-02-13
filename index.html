@@ -1,0 +1,260 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Valentina… ¿Quieres ser mi Valentín?</title>
+
+<link href="https://fonts.googleapis.com/css2?family=Great+Vibes&family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
+
+<style>
+*{
+  margin:0;
+  padding:0;
+  box-sizing:border-box;
+}
+
+body{
+  font-family:'Poppins', sans-serif;
+  background: linear-gradient(135deg,#ff8fb1,#ff4f81,#ffd6e0);
+  color:#fff;
+  overflow-x:hidden;
+}
+
+/* corazones flotando */
+.heart{
+  position:fixed;
+  bottom:-20px;
+  font-size:20px;
+  animation:float 8s linear infinite;
+  opacity:0.7;
+}
+
+@keyframes float{
+  0%{transform:translateY(0);}
+  100%{transform:translateY(-110vh);}
+}
+
+/* hero */
+.hero{
+  height:100vh;
+  display:flex;
+  flex-direction:column;
+  align-items:center;
+  justify-content:center;
+  text-align:center;
+  padding:20px;
+  background: radial-gradient(circle at center, rgba(255,255,255,0.2), transparent);
+}
+
+.hero h1{
+  font-family:'Great Vibes', cursive;
+  font-size:3rem;
+  margin-bottom:20px;
+}
+
+.hero p{
+  max-width:600px;
+  font-size:1.2rem;
+  line-height:1.6;
+}
+
+/* secciones */
+section{
+  padding:60px 20px;
+  text-align:center;
+}
+
+.card-container{
+  display:flex;
+  flex-wrap:wrap;
+  justify-content:center;
+  gap:20px;
+  margin-top:30px;
+}
+
+.card{
+  background:rgba(255,255,255,0.15);
+  padding:25px;
+  border-radius:20px;
+  width:250px;
+  backdrop-filter:blur(8px);
+  transition:0.3s;
+}
+
+.card:hover{
+  transform:scale(1.05);
+}
+
+/* botones */
+.buttons{
+  margin-top:40px;
+}
+
+button{
+  padding:15px 25px;
+  border:none;
+  border-radius:30px;
+  font-size:1rem;
+  cursor:pointer;
+  margin:10px;
+  transition:0.3s;
+}
+
+.primary{
+  background:#fff;
+  color:#ff4f81;
+  font-weight:600;
+}
+
+.secondary{
+  background:transparent;
+  border:2px solid #fff;
+  color:#fff;
+}
+
+button:hover{
+  transform:scale(1.1);
+}
+
+#respuesta{
+  margin-top:30px;
+  font-size:1.5rem;
+  font-family:'Great Vibes', cursive;
+  display:none;
+}
+
+/* Perritos animados */
+.pet-container{
+  margin-top:30px;
+  display:none;
+  font-size:40px;
+}
+
+.pet{
+  display:inline-block;
+  margin:10px;
+  animation:jump 1.2s infinite;
+}
+
+.pet:nth-child(2){ animation-delay:0.2s; }
+.pet:nth-child(3){ animation-delay:0.4s; }
+.pet:nth-child(4){ animation-delay:0.6s; }
+.pet:nth-child(5){ animation-delay:0.8s; }
+
+@keyframes jump{
+  0%,100%{ transform:translateY(0); }
+  50%{ transform:translateY(-15px); }
+}
+
+/* cierre */
+.footer{
+  padding:60px 20px;
+  font-family:'Great Vibes', cursive;
+  font-size:2rem;
+}
+
+/* responsive */
+@media(max-width:600px){
+  .hero h1{font-size:2.2rem;}
+}
+</style>
+</head>
+
+<body>
+
+<!-- corazones animados -->
+<script>
+for(let i=0;i<20;i++){  
+  let heart=document.createElement("div");
+  heart.className="heart";
+  heart.style.left=Math.random()*100+"vw";
+  heart.style.animationDuration=(5+Math.random()*5)+"s";
+  heart.innerHTML="❤️";
+  document.body.appendChild(heart);
+}
+</script>
+
+<!-- HERO -->
+<section class="hero">
+  <h1>Valentina Garcés… ¿Quieres ser mi Valentín?</h1>
+  <p>
+    Este 14 de febrero quiero vivirlo contigo y crear un recuerdo que solo sea nuestro.
+  </p>
+</section>
+
+<!-- MENSAJE -->
+<section>
+  <h2 style="font-family:'Great Vibes',cursive;font-size:2.5rem;">Quiero decirte algo…</h2>
+  <p style="max-width:600px;margin:20px auto;font-size:1.1rem;">
+    Hay personas que llegan y cambian la energía de todo… y tú eres una de ellas.
+    Me gusta cómo sonríes, cómo miras la vida y cómo haces que cada momento
+    tenga algo especial. Me encantaría compartir este día contigo y empezar
+    a crear recuerdos que se sientan nuestros.
+  </p>
+</section>
+
+<!-- RAZONES -->
+<section>
+  <h2 style="font-family:'Great Vibes',cursive;font-size:2.5rem;">Por qué tú</h2>
+
+  <div class="card-container">
+    <div class="card">💗 Me encanta tu sonrisa</div>
+    <div class="card">✨ Tu forma de ver la vida</div>
+    <div class="card">🌹 Cómo haces especial cada momento</div>
+    <div class="card">💫 La tranquilidad que transmites</div>
+  </div>
+</section>
+
+<!-- INTERACTIVO -->
+<section>
+  <h2 style="font-family:'Great Vibes',cursive;font-size:2.5rem;">Entonces…</h2>
+
+  <div class="buttons">
+    <button class="primary" onclick="acepta()">Sí, quiero ser tu Valentín 💘</button>
+    <button class="secondary" onclick="duda()">Necesito pensarlo…</button>
+  </div>
+
+  <div id="respuesta"></div>
+
+  <!-- Perritos disfrazados -->
+  <div class="pet-container" id="pets">
+    🐶☕ 🐶🐻 🐶🐰 🐶🐼 🐶🦊
+    <div style="font-size:14px;margin-top:10px;">
+      Perritos disfrazados acompañando este momento especial 🐾
+    </div>
+  </div>
+</section>
+
+<!-- CIERRE -->
+<section class="footer">
+  No es solo San Valentín… eres tú.  
+  <br><br>
+  — Con cariño, para ti ❤️
+</section>
+
+<script>
+function acepta(){
+  const r=document.getElementById("respuesta");
+  const pets=document.getElementById("pets");
+
+  r.style.display="block";
+  pets.style.display="block";
+
+  r.innerHTML="Sabía que este momento iba a llegar ❤️";
+}
+
+function duda(){
+  const r=document.getElementById("respuesta");
+  r.style.display="block";
+  r.innerHTML="Está bien… pero no tardes mucho, esto lo pensé para ti 💭❤️";
+}
+</script>
+
+<!-- Música opcional -->
+<audio autoplay loop>
+  <source src="https://www.bensound.com/bensound-music/bensound-romantic.mp3" type="audio/mp3">
+</audio>
+
+</body>
+</html>

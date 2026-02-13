@@ -1,185 +1,51 @@
 <!DOCTYPE html>
-<html lang="es">
+<html lang="en">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Valentina… ¿Quieres ser mi Valentín?</title>
-
-<link href="https://fonts.googleapis.com/css2?family=Great+Vibes&family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
-
-<style>
-*{margin:0;padding:0;box-sizing:border-box;}
-body{
-  font-family:'Poppins', sans-serif;
-  background:linear-gradient(135deg,#ff8fb1,#ff4f81,#ffd6e0);
-  color:white;
-  overflow:hidden;
-}
-
-/* pantallas */
-.screen{
-  position:absolute;
-  width:100%;
-  height:100vh;
-  display:flex;
-  flex-direction:column;
-  justify-content:center;
-  align-items:center;
-  text-align:center;
-  padding:20px;
-  transition:opacity 1s ease;
-}
-
-.hidden{opacity:0;pointer-events:none;}
-
-/* títulos */
-h1{
-  font-family:'Great Vibes',cursive;
-  font-size:3rem;
-  margin-bottom:20px;
-}
-p{max-width:600px;line-height:1.6;}
-
-/* botones */
-button{
-  margin:10px;
-  padding:15px 25px;
-  border:none;
-  border-radius:30px;
-  font-size:1rem;
-  cursor:pointer;
-  transition:.3s;
-}
-.primary{background:white;color:#ff4f81;font-weight:600;}
-.secondary{background:transparent;border:2px solid white;color:white;}
-button:hover{transform:scale(1.1);}
-
-/* corazones flotando */
-.heart{
-  position:absolute;
-  font-size:20px;
-  animation:float 8s linear infinite;
-}
-@keyframes float{
-  from{transform:translateY(100vh);}
-  to{transform:translateY(-120vh);}
-}
-
-/* perritos */
-.dogs{
-  font-size:60px;
-  display:flex;
-  gap:20px;
-  margin-top:30px;
-}
-
-ing.dog{
-  animation:dance 1s infinite alternate;
-}
-
-@keyframes dance{
-  from{transform:translateY(0) rotate(-5deg);}
-  to{transform:translateY(-20px) rotate(5deg);}
-}
-
-/* confeti */
-.confetti{
-  position:absolute;
-  width:10px;
-  height:10px;
-  background:white;
-  animation:fall 4s linear infinite;
-}
-@keyframes fall{
-  from{transform:translateY(-10vh);}
-  to{transform:translateY(110vh);
-}
-
-</style>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Valentine's Proposal</title>
+    <style>
+        body { font-family: Arial, sans-serif; background: pink; overflow: hidden; animation: pulse 5s infinite; }
+        @keyframes pulse { 0% { background-color: #ffcccb; } 50% { background-color: #ffb6c1; } 100% { background-color: #ffcccb; } }
+        .screen { position: absolute; width: 100%; height: 100%; display: none; justify-content: center; align-items: center; transition: opacity 0.5s; }
+        .active { display: flex; opacity: 1; }
+        .button { padding: 10px 20px; font-size: 20px; cursor: pointer; border: none; background: #ff69b4; color: white; border-radius: 5px; }
+        .button:hover { background: #ff1493; animation: ripple 0.6s linear; }
+        @keyframes ripple { from { transform: scale(1); opacity: 1; } to { transform: scale(1.5); opacity: 0; } }
+    </style>
 </head>
-
 <body>
-
-<!-- Pantalla 1 -->
-<div class="screen" id="inicio">
-  <h1>Valentina Garcés…</h1>
-  <p>Hay algo especial que quiero preguntarte hoy 💗</p>
-  <button class="primary" onclick="irPregunta()">Continuar</button>
-</div>
-
-<!-- Pantalla 2 -->
-<div class="screen hidden" id="pregunta">
-  <h1>¿Quieres ser mi Valentín?</h1>
-  <p>Este 14 de febrero quiero vivirlo contigo y crear un recuerdo que solo sea nuestro.</p>
-
-  <button class="primary" onclick="acepta()">Sí, quiero 💘</button>
-  <button class="secondary" onclick="duda()">Necesito pensarlo���</button>
-</div>
-
-<!-- Pantalla 3 aceptación -->
-<div class="screen hidden" id="aceptacion">
-  <h1>Sabía que este momento iba a llegar ❤️</h1>
-  <p>Prometo hacerte sonreír ese día y todos los que vengan.</p>
-
-  <div class="dogs">
-    <div class="dog">🐶☕</div>
-    <div class="dog">🐶🐻</div>
-    <div class="dog">🐶🐰</div>
-    <div class="dog">🐶🐼</div>
-    <div class="dog">🐶🦊</div>
-  </div>
-</div>
-
-<!-- Pantalla duda -->
-<div class="screen hidden" id="duda">
-  <h1>Lo pensarás…</h1>
-  <p>Pero igual tenía que decírtelo 💗</p>
-</div>
-
-<script>
-
-/* corazones constantes */
-for(let i=0;i<25;i++){ 
-  let h=document.createElement("div");
-  h.className="heart";
-  h.innerHTML="❤️";
-  h.style.left=Math.random()*100+"vw";
-  h.style.animationDuration=(5+Math.random()*5)+"s";
-  document.body.appendChild(h);
-}
-
-/* confeti cuando acepta */
-function confetti(){
-  for(let i=0;i<40;i++){ 
-    let c=document.createElement("div");
-    c.className="confetti";
-    c.style.left=Math.random()*100+"vw";
-    c.style.animationDuration=(2+Math.random()*3)+"s";
-    document.body.appendChild(c);
-  }
-}
-
-function irPregunta(){
-  document.getElementById("inicio").classList.add("hidden");
-  document.getElementById("pregunta").classList.remove("hidden");
-}
-
-function acepta(){
-  document.getElementById("pregunta").classList.add("hidden");
-  document.getElementById("aceptacion").classList.remove("hidden");
-  confetti();
-}
-
-function duda(){
-  document.getElementById("pregunta").classList.add("hidden");
-  document.getElementById("duda").classList.remove("hidden");
-}
-
-</script>
-
-<audio autoplay loop>
-  <source src="https://www.bensound.com/bensound-music/bensound-romantic.mp3" type="audio/mp3">
-</audio>
-
+    <div class="screen active">
+        <h1>Will you be my Valentine?</h1>
+        <button class="button" onclick="nextScreen()">Yes!</button>
+    </div>
+    <div class="screen">
+        <h2>Here's a sparkly surprise!</h2>
+        <button class="button" onclick="nextScreen()">Continue</button>
+    </div>
+    <div class="screen">
+        <h2>💖 I love you! 💖</h2>
+        <button class="button" onclick="nextScreen()">Next</button>
+    </div>
+    <div class="screen">
+        <h2>Let’s celebrate with confetti!</h2>
+        <button class="button" onclick="conclude()">Let's go!</button>
+    </div>
+    <script>
+        let currentScreen = 0;
+        function nextScreen() {
+            const screens = document.querySelectorAll('.screen');
+            screens[currentScreen].classList.remove('active');
+            currentScreen++;
+            if (currentScreen < screens.length) {
+                screens[currentScreen].classList.add('active');
+            }
+        }
+        function conclude() {
+            alert('Thank you for celebrating love!');
+            document.body.style.background = 'white';
+            // Add confetti and animations here in future implementation
+        }
+    </script>
 </body>
 </html>
